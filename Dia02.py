@@ -13,18 +13,18 @@ def right_answer_numeric(user_question):
     """
     
     while True:
-        user_choice = input(f"{user_question}\n")
+        user_choice = input(user_question)
         
         # Normaliza entrada (remove espaços e coloca em minúsculas)
-        normalized = user_choice.strip().lower()
+        # normalized = user_choice.strip().lower()
         # Procura números dentro da string (ex.: "10 reais")
-        number = ''.join([c for c in normalized if c.isdigit()])
+        # number = ''.join([c for c in normalized if c.isdigit()])
 
 
             # 1. Verifica se a resposta é numérica 
         try:
-            num_choice = float(number)
-            
+            num_choice = float(user_choice)
+
             print(f"Valor informado: {num_choice}")
             return num_choice
         except ValueError:
@@ -71,8 +71,11 @@ def right_answer(user_question):
         print("Opção inválida, tente novamente.")
 
 
-def calculator(total_bill, tip_amount,people)  :
-    result = round(total_bill*(1+ (tip_amount/100))/people, 2)
+def calculator(total_bill, tip_amount,people):
+
+    total_bill_tip = total_bill*(1+(tip_amount/100))
+    result = round(total_bill_tip/people, 2)
+    
     return result
 
 
@@ -82,13 +85,13 @@ def main():
     clear_console()
     print("Bem vindo a calculadora de conta para restaurante!")
     
-    total_bill = right_answer_numeric("Qual foi o valor total da conta? ")
+    total_bill = right_answer_numeric("Qual foi o valor total da conta?\n$ ")
 
     tip_amount = right_answer("Qual o percentual de gorjeta que gostaria de pagar? 10, 12 or 15?")
-    people = right_answer_numeric("Quantas pessoas irão dividir a conta? ")
+    people = right_answer_numeric("Quantas pessoas irão dividir a conta?\n")
 
     total_by_person = calculator(total_bill, tip_amount,people)
 
-    print(f"Cada pessoa deverá pagar: R$ {total_by_person}")
+    print(f"Cada pessoa deverá pagar: $ {total_by_person}")
     
 main()
